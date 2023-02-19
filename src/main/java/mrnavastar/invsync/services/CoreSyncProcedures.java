@@ -14,12 +14,12 @@ public class CoreSyncProcedures {
     public static void init() {
         if (settings.SYNC_INVENTORY) {
             ServerSyncEvents.FETCH_PLAYER_DATA.register((player, playerData) -> {
-                player.getInventory().readNbt((NbtList) playerData.getNbt("INVENTORY"));
-                player.getInventory().selectedSlot = playerData.getInt("SELECTED_SLOT");
+                player.inventory.readNbt((NbtList) playerData.getNbt("INVENTORY"));
+                player.inventory.selectedSlot = playerData.getInt("SELECTED_SLOT");
             });
             ServerSyncEvents.SAVE_PLAYER_DATA.register((player, playerData) -> {
-                playerData.put("INVENTORY", player.getInventory().writeNbt(new NbtList()));
-                playerData.put("SELECTED_SLOT", player.getInventory().selectedSlot);
+                playerData.put("INVENTORY", player.inventory.writeNbt(new NbtList()));
+                playerData.put("SELECTED_SLOT", player.inventory.selectedSlot);
             });
         }
 

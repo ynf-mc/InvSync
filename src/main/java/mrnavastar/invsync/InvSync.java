@@ -63,7 +63,7 @@ public class InvSync implements ModInitializer {
                     throw new RuntimeException(e);
                 }
 
-                ServerPlayerEntity player = handler.getPlayer();
+                ServerPlayerEntity player = handler.player;
                 DataContainer playerDataContainer = playerData.get(player.getUuid());
 
                 playerData.beginTransaction();
@@ -76,7 +76,7 @@ public class InvSync implements ModInitializer {
         }));
 
         ServerPlayConnectionEvents.DISCONNECT.register(((handler, server) -> {
-            ServerPlayerEntity player = handler.getPlayer();
+            ServerPlayerEntity player = handler.player;
             DataContainer playerDataContainer = playerData.get(player.getUuid());
             if (playerDataContainer == null) playerDataContainer = playerData.createDataContainer(player.getUuid());
 
